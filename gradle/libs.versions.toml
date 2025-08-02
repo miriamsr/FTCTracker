@@ -17,6 +17,7 @@ kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
 ktor = "3.2.0"
 logback = "1.5.18"
+keyple = "0.1.6"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -35,6 +36,7 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-serverCore = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
+keyple = { module = "org.eclipse.keyple:keyple-interop-localreader-nfcmobile-kmp-lib", version.ref = "keyple" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
