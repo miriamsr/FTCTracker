@@ -21,3 +21,25 @@ dependencies {
     testImplementation(libs.ktor.serverTestHost)
     testImplementation(libs.kotlin.testJunit)
 }
+
+val generateVersionFile by tasks.registering {
+    val outputDir = layout.buildDirectory.dir("generated/version")
+    val versionFile = outputDir.map { it.file("AppVersion.kt") }
+
+    outputs.file(versionFile)
+
+    doLast {
+        versionFile.get().asFile.writeText("""
+            package me.zharel.ftctracker
+
+            object AppVersion {
+                const val VERSION = "${project.version}"
+            }
+        """.trimIndent())
+    }
+}
+
+sourceSets["main"].java.srcDir(layout.buildDirectory.dir("generated/version"))
+tasks.named("compileKotlin").configure {
+    dependsOn(generateVersionFile)
+}
