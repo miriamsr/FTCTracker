@@ -5,7 +5,6 @@ plugins {
 }
 
 group = "me.zharel.ftctracker"
-version = "1.0.0"
 application {
     mainClass.set("me.zharel.ftctracker.ApplicationKt")
 
@@ -26,14 +25,20 @@ val generateVersionFile by tasks.registering {
     val outputDir = layout.buildDirectory.dir("generated/version")
     val versionFile = outputDir.map { it.file("AppVersion.kt") }
 
+    val versionProvider = provider {
+        project.findProperty("version") as String? ?: "unknown"
+    }
+
+    inputs.property("version", versionProvider)
     outputs.file(versionFile)
 
     doLast {
+        val version = versionProvider.get()
         versionFile.get().asFile.writeText("""
             package me.zharel.ftctracker
 
             object AppVersion {
-                const val VERSION = "${project.version}"
+                const val VERSION = "$version"
             }
         """.trimIndent())
     }

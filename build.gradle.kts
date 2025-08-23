@@ -9,3 +9,6 @@ plugins {
     alias(libs.plugins.kotlinJvm) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
 }
+allprojects {
+    version = project.findProperty("version") as String
+}
